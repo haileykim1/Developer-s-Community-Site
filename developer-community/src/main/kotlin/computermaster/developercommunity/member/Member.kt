@@ -1,6 +1,6 @@
-package computermaster.member
+package computermaster.developercommunity.member
 
-import computermaster.post.Post
+import computermaster.developercommunity.post.Post
 import java.util.concurrent.ConcurrentHashMap
 
 class Member {

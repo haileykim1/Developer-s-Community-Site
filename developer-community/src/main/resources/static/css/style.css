@@ -1,3 +1,6 @@
+a{
+    text-decoration: none;
+}
 
 .app_title {
     text-decoration:none;
@@ -85,4 +88,16 @@ header{
     margin: 5px 10px;
     border: 1px solid black;
     height: 110px;
+}
+
+.boardlist-item{
+    padding: 10px 30px;
+    border-top: 1px solid #D3D3D3;
+    border-bottom: 1px solid #D3D3D3;
+    cursor: pointer;
+}
+
+#boardlist-additem{
+    text-align: center;
+    background-color: #64b7f6;
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<th:block th:fragment="headFragment">
+    <header>
+        <a href="/" class="app_title">DEV COMMUNITY</a>
+        <div class="header_right">
+            <span class="search">
+                <form action="/">
+                    <input type="text" placeholder="Search.." name="search"/>
+                    <button class="searching_btn">
+                        <img src = "../images/magnifying-glass-1294834.svg" />
+                    </button>
+                </form>
+            </span>
+            <span>
+                <a class="posting_btn">글쓰기</a>
+                <a class="signin_btn">로그인</a>
+            </span>
+        </div>
+    </header>
+</th:block>
+</html>

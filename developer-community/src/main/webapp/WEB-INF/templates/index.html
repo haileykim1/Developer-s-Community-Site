@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Welcome Page</title>
 </head>
 <body>
-    <header>
-        <a href="/" class="app_title">DEV COMMUNITY</a>
-        <div class="header_right">
-            <span class="search">
-                <form action="/">
-                    <input type="text" placeholder="Search.." name="search"/>
-                    <button class="searching_btn">
-                        <img src = "images/magnifying-glass-1294834.svg" />
-                    </button>
-                </form>
-            </span>
-            <span>
-                <a class="posting_btn">글쓰기</a>
-                <a class="signin_btn">로그인</a>
-            </span>
-        </div>
-    </header>
+
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
 
     <div class="container">
 
-        <div class="boards" OnClick="/">
+        <div class="boards" onclick="location.href='boards';">
             BOARDS
-            <span class="move_page"> > </span>
+            <div class="move_page"> > </div>
         </div>
 
         <div class="board">
