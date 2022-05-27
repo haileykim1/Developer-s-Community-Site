@@ -7,6 +7,23 @@
 </head>
 <body>
     <th:block th:replace="fragments/head :: headFragment"></th:block>
-
+    <div class="container">
+        <div class="boardlist-item grey-item">
+            BOARD 추가
+        </div>
+        <div class="boardlist-item">
+            <form action="/boards/new" method="post">
+                <div class="line50">
+                    추가할 BOARD의 이름을 입력하세요
+                </div>
+                <div class="line50">
+                    <input type="text" placeholder="board 이름" name="newboard"/>
+                </div>
+                <div class="line50">
+                    <button>등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -8,19 +8,25 @@
 <body>
     <th:block th:replace="fragments/head :: headFragment"></th:block>
 
-    <div class="boardlist-item" onclick="location.href='boards/item';">
-        BOARD NAME1
-        <div class="move_page"> > </div>
+
+    <div class="container">
+        <div class="boardlist-item grey-item">
+            BOARDS
+        </div>
+        <div class="boardlist-item" onclick="location.href='boards/item';">
+            BOARD NAME1
+            <div class="move_page"> > </div>
+        </div>
+        <div class="boardlist-item" onclick="location.href='boards/item';">
+            BOARD NAME2
+            <div class="move_page"> > </div>
+        </div>
+
+        <div class="boardlist-item" id="boardlist-additem" onclick="location.href='boards/new';">
+            +
+        </div>
     </div>
 
-    <div class="boardlist-item" onclick="location.href='boards/item';">
-        BOARD NAME2
-        <div class="move_page"> > </div>
-    </div>
-
-    <div class="boardlist-item" id="boardlist-additem" onclick="location.href='boards/new';">
-        +
-    </div>
 
 </body>
 </html>

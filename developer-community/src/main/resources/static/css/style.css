@@ -1,3 +1,9 @@
+
+.container{
+    width: 1180px;
+    margin: 0 auto;
+}
+
 a{
     text-decoration: none;
 }
@@ -100,4 +106,13 @@ header{
 #boardlist-additem{
     text-align: center;
     background-color: #64b7f6;
+}
+
+.grey-item{
+    font-weight: bold;
+    background-color: #d9dddc;
+}
+
+.line50{
+    height: 50px;
 }
