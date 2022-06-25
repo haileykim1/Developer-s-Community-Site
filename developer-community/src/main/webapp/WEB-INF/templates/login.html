@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+
+    <div class="container">
+
+        <h2>로그인</h2>
+
+        <a href="/oauth2/authorization/google">
+            <img src="../images/btn_google_signin_light_normal_web.png">
+        </a>
+
+    </div>
+
+</body>
+</html>
