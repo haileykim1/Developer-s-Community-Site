@@ -29,6 +29,11 @@ class OAuthAttributes {
         fun of(registrationId: String,
                userNameAttributes: String,
                attributes: ConcurrentHashMap<String, Object>): OAuthAttributes {
+
+            if("naver".equals(registrationId)){
+                return ofNaver("id", attributes)
+            }
+
             return ofGoogle(userNameAttributes, attributes)
         }
 
@@ -37,6 +42,16 @@ class OAuthAttributes {
                     .setDescription(attributes!!["description"]!! as String)
                     .setAttributes(attributes!!)
                     .setNameAttributeKey(userNameAttributeName!!)
+                    .build()
+        }
+
+        fun ofNaver(userNameAttributeName: String, attributes: ConcurrentHashMap<String, Object>): OAuthAttributes{
+            val response = attributes.get("response")!! as Map<String, Object>
+
+            //name, email
+            return Builder(response.get("name").toString(), response.get("email").toString())
+                    .setAttributes(response as ConcurrentHashMap<String, Object>)
+                    .setNameAttributeKey(userNameAttributeName)
                     .build()
         }
 

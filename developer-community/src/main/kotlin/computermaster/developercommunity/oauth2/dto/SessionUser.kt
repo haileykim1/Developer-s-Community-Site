@@ -7,12 +7,12 @@ import java.io.Serializable
 class SessionUser: Serializable {
     var name: String? = null
     var email: String? = null
-    var description: String? = null
+    //var description: String? = null
 
     constructor(user: User){
         this.name = user.name
         this.email = user.email
-        this.description = user.description
+        //this.description = user.description
     }
 
 }

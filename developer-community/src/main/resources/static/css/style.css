@@ -118,9 +118,22 @@ header{
 }
 
 .center-div{
-    align-items: center;
 }
 
 .center-item{
     display: inline-block;
+}
+
+.login-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image{
+
+    height: 50px;
+    width: auto;
+    display: inline-block;
+    margin: 10px auto;
 }
