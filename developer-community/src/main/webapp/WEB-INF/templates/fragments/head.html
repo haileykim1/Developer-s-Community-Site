@@ -14,9 +14,12 @@
                 </form>
             </span>
             <span>
+                <span th:text="${userName}">>게스트</span>
                 <a class="posting_btn">글쓰기</a>
-                <a class="signin_btn" onclick="location.href='login';">로그인</a>
+                <a class="signin_btn" th:if="${userName == null}" onclick="location.href='login';">로그인</a>
+                <a class="logout_btn" th:if="${userName != null}" onclick="location.href='/logout';">로그아웃</a>
             </span>
+
         </div>
     </header>
 </th:block>

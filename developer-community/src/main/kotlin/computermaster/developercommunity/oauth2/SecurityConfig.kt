@@ -35,6 +35,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter {
                 }
                 .logout{
                     it.logoutSuccessUrl("/")
+                    //로그아웃 시 세션정보 제거(default : true)
                 }
                 .oauth2Login{
                     it.loginPage("/login")

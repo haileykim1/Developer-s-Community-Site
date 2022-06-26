@@ -11,6 +11,7 @@ class LoginController {
     //login 화면
     @GetMapping
     fun login(): String{
+
         return "login"
     }
 

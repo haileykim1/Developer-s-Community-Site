@@ -4,6 +4,9 @@ import computermaster.developercommunity.user.User
 import computermaster.developercommunity.user.UserRepository
 import computermaster.developercommunity.oauth2.dto.OAuthAttributes
 import computermaster.developercommunity.oauth2.dto.SessionUser
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Scope
+import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
@@ -16,11 +19,13 @@ import java.util.concurrent.ConcurrentHashMap
 import javax.servlet.http.HttpSession
 
 @Service
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 class CustomOAuth2UserService: OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     val userRepository: UserRepository
     val httpSession: HttpSession
 
+    @Autowired
     constructor(userRepository: UserRepository, httpSession: HttpSession){
         this.userRepository = userRepository
         this.httpSession = httpSession
@@ -34,6 +39,10 @@ class CustomOAuth2UserService: OAuth2UserService<OAuth2UserRequest, OAuth2User> 
 
         //현재 로그인 진행 중인 서비스 구분
         val registrationId = userRequest!!.clientRegistration.registrationId
+
+        println("===========================")
+        println("${registrationId}")
+        println("============================")
 
         //OAuth2로그인 진행 시 키가 되는 필드값(primary key같은)
         val userNameAttribute = userRequest.clientRegistration.providerDetails.userInfoEndpoint.userNameAttributeName
