@@ -1,83 +1,78 @@
 package computermaster.developercommunity.oauth2.dto
 
-import computermaster.developercommunity.user.Role
-import computermaster.developercommunity.user.User
-import java.util.concurrent.ConcurrentHashMap
+import computermaster.developercommunity.domain.user.Role
+import computermaster.developercommunity.domain.user.User
 
 class OAuthAttributes {
-    var attributes: ConcurrentHashMap<String, Object>? = null
+    val attributes: Map<String, Object>
     var nameAttributeKey: String? = null
-    var name: String? = null
-    var description: String? = null
-    var email: String? = null
+    var name: String? = "김"
+    var email: String? = "default@default.com"
+    var role = Role.GUEST
 
-    constructor(attributes: ConcurrentHashMap<String, Object>?,
+    constructor(attributes: Map<String, Object>,
         nameAttributeKey: String?,
         name: String?,
-        description: String?,
-        email: String?){
+        email: String?,
+        role: Role = Role.GUEST){
         this.attributes = attributes
         this.nameAttributeKey = nameAttributeKey
         this.name = name
-        this.description = description
         this.email = email
+        this.role = role
     }
 
     companion object{
 
 
         fun of(registrationId: String,
-               userNameAttributes: String,
-               attributes: ConcurrentHashMap<String, Object>): OAuthAttributes {
+               userNameAttributeName: String,
+               attributes: Map<String, Object>, role: Role = Role.GUEST): OAuthAttributes {
 
             if("naver".equals(registrationId)){
-                return ofNaver("id", attributes)
+                return ofNaver("id", attributes, role)
             }
 
-            return ofGoogle(userNameAttributes, attributes)
+            return ofGoogle(userNameAttributeName, attributes, role)
         }
 
-        private fun ofGoogle(userNameAttributeName: String, attributes: ConcurrentHashMap<String, Object>): OAuthAttributes {
+        private fun ofGoogle(userNameAttributeName: String, attributes: Map<String, Object>, role: Role = Role.GUEST): OAuthAttributes {
             return Builder(attributes!!.get("name")!! as String, attributes!!["email"]!! as String)
-                    .setDescription(attributes!!["description"]!! as String)
                     .setAttributes(attributes!!)
                     .setNameAttributeKey(userNameAttributeName!!)
+                    .setRole(role)
                     .build()
         }
 
-        fun ofNaver(userNameAttributeName: String, attributes: ConcurrentHashMap<String, Object>): OAuthAttributes{
+        fun ofNaver(userNameAttributeName: String, attributes: Map<String, Object>, role: Role = Role.GUEST): OAuthAttributes{
             val response = attributes.get("response")!! as Map<String, Object>
 
             //name, email
             return Builder(response.get("name").toString(), response.get("email").toString())
-                    .setAttributes(response as ConcurrentHashMap<String, Object>)
+                    .setAttributes(response as Map<String, Object>)
                     .setNameAttributeKey(userNameAttributeName)
+                    .setRole(role)
                     .build()
         }
 
+
+
     }
 
-    //게스트 전용
-    fun toEntity(): User{
-        return User(null, null, null, Role.GUEST)
+    fun toEntity(): User {
+        return User(name, email, role)
     }
 
 
     //builder 패턴 적용
-    class Builder(val name: String, val email: String){
-        private var nDescription: String? = null
-        private var nAttributes: ConcurrentHashMap<String, Object>? = null
-        private var nNameAttributeKey: String? = null
+    class Builder(val name: String?, val email: String?){
+        private lateinit var nAttributes: Map<String, Object>
+        private var nNameAttributeKey: String = ""
         private var onAccept: (() -> Unit)? = null
+        private var role: Role = Role.GUEST
 
 
-
-        fun setDescription(description: String?): Builder {
-            this.nDescription = description
-            return this
-        }
-
-        fun setAttributes(attributes: ConcurrentHashMap<String, Object>): Builder {
+        fun setAttributes(attributes: Map<String, Object>): Builder {
             this.nAttributes = attributes
             return this
         }
@@ -87,13 +82,18 @@ class OAuthAttributes {
             return this
         }
 
+        fun setRole(role: Role): Builder{
+            this.role = role
+            return this
+        }
+
         fun setOnAccept(onAccept: (() -> Unit)?): Builder {
             this.onAccept = onAccept
             return this
         }
 
 
-        fun build() = OAuthAttributes(nAttributes, nNameAttributeKey, name, nDescription, email)
+        fun build() = OAuthAttributes(nAttributes, nNameAttributeKey, name, email, role)
     }
 
 

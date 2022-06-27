@@ -26,7 +26,8 @@ class IndexController {
         val sessionUser = httpSession.getAttribute("user")
         sessionUser?.let{
             val user = sessionUser as SessionUser
-            model.addAttribute("userName", user.name)
+            println("=====================\n${user.name}\n===================")
+            model.addAttribute("username", user.name)
         }
 
         return "index"

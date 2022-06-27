@@ -1,4 +1,4 @@
-package computermaster.developercommunity.post
+package computermaster.developercommunity.domain.post
 
 import javax.persistence.*
 

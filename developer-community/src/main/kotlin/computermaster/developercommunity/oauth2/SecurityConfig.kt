@@ -1,8 +1,9 @@
 package computermaster.developercommunity.oauth2
 
-import computermaster.developercommunity.user.Role
+import computermaster.developercommunity.domain.user.Role
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -10,7 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
-@ComponentScan
+@Configuration
 @EnableWebSecurity
 class SecurityConfig: WebSecurityConfigurerAdapter {
 
@@ -30,7 +31,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter {
                 }
                 .authorizeRequests{
                     it.antMatchers("/", "/login", "/css/**", "/images/**").permitAll()
-                    it.antMatchers("/api/v1/**").hasRole(Role.USER.name)
+                    //it.antMatchers("/api/v1/**").hasRole(Role.USER.name)
                     it.anyRequest().authenticated()
                 }
                 .logout{
@@ -39,6 +40,8 @@ class SecurityConfig: WebSecurityConfigurerAdapter {
                 }
                 .oauth2Login{
                     it.loginPage("/login")
+                    it.defaultSuccessUrl("/", true)
+                    //로그인 성공 후 사용자 정보 가져와서 customAuth2UserService에서 사용자 정보 처리
                     it.userInfoEndpoint().userService(customOAuth2UserService)
                 }
 

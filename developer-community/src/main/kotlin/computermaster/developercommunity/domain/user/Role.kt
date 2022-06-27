@@ -1,4 +1,4 @@
-package computermaster.developercommunity.user
+package computermaster.developercommunity.domain.user
 
 enum class Role {
 

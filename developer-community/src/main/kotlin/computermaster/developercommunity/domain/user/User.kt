@@ -1,4 +1,4 @@
-package computermaster.developercommunity.user
+package computermaster.developercommunity.domain.user
 
 import javax.persistence.*
 
@@ -16,26 +16,27 @@ class User {
     @Column(nullable = false)
     var email: String? = null
 
-    @Column
-    var description: String? = null
+    /*@Column
+    var description: String? = null*/
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    var role: Role? = null
+    var role: Role = Role.GUEST
 
-    constructor(name: String?, email: String?, description: String?, role: Role?){
+
+    constructor(name: String?, email: String?, role: Role = Role.GUEST){
         this.name = name
         this.email = email
-        this.description = description
         this.role = role
     }
 
     /*
     var posts: ConcurrentHashMap<String, Post> = ConcurrentHashMap<String, Post>()
 */
-    fun update(name: String?, description: String?){
+    fun update(name: String?): User{
         this.name = name
-        this.description = description
+
+        return this
     }
 
     //builder?
