@@ -27,7 +27,9 @@ class LoginController {
         sessionUser?.let{
             val user = sessionUser as SessionUser
             model.addAttribute("username", user.name)
+            return "redirect:/"
         }
+
 
         return "login"
     }

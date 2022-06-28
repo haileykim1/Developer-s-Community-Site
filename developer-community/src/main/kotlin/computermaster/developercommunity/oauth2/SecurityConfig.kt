@@ -30,7 +30,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter {
                     it.disable()
                 }
                 .authorizeRequests{
-                    it.antMatchers("/", "/login", "/css/**", "/images/**").permitAll()
+                    it.antMatchers("/", "/login", "/css/**", "/images/**", "/favicon.ico").permitAll()
                     //it.antMatchers("/api/v1/**").hasRole(Role.USER.name)
                     it.anyRequest().authenticated()
                 }
@@ -40,7 +40,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter {
                 }
                 .oauth2Login{
                     it.loginPage("/login")
-                    it.defaultSuccessUrl("/", true)
+                    //it.defaultSuccessUrl("/", true)
                     //로그인 성공 후 사용자 정보 가져와서 customAuth2UserService에서 사용자 정보 처리
                     it.userInfoEndpoint().userService(customOAuth2UserService)
                 }
